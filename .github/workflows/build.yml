@@ -20,7 +20,16 @@ jobs:
 
 
     - name: Configure CMake
-      run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+      id: cmake_config
+      continue-on-error: true
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Release > cmake_log.txt 2>&1
+
+    - name: Upload CMake Log
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: CMake_Log_${{ matrix.os }}
+        path: cmake_log.txt
 
     - name: Build
       run: cmake --build build --config Release
