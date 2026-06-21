@@ -1,0 +1,60 @@
+name: Build Vocal Lab
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up CMake
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+        cmake-version: '3.22.x'
+
+    - name: Configure CMake
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build build --config Release
+
+    - name: Package Mac Artifacts
+      if: matrix.os == 'macos-latest'
+      run: |
+        mkdir -p VocalLab_Mac_Release
+        cp -r build/VocalLab_artefacts/Release/VST3/Vocal\ Lab.vst3 VocalLab_Mac_Release/
+        cp -r build/VocalLab_artefacts/Release/AU/Vocal\ Lab.component VocalLab_Mac_Release/
+        cp -r build/VocalLab_artefacts/Release/Standalone/Vocal\ Lab.app VocalLab_Mac_Release/
+        zip -r VocalLab_Mac_Release.zip VocalLab_Mac_Release/
+
+    - name: Upload Mac Artifacts
+      if: matrix.os == 'macos-latest'
+      uses: actions/upload-artifact@v3
+      with:
+        name: VocalLab_Mac_Release
+        path: VocalLab_Mac_Release.zip
+
+    - name: Build Windows Installer
+      if: matrix.os == 'windows-latest'
+      run: |
+        # Download and install Inno Setup on the Windows runner
+        choco install innosetup
+        # Compile the installer (default path for chocolatey install)
+        "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" VocalLabInstaller.iss
+
+    - name: Upload Windows Artifacts
+      if: matrix.os == 'windows-latest'
+      uses: actions/upload-artifact@v3
+      with:
+        name: VocalLab_Windows_Installer
+        path: Installer/VocalLab_Installer_v1.0.0.exe

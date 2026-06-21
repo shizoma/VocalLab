@@ -1,0 +1,14 @@
+# Build and IDE folders
+build/
+Installer/
+.vs/
+out/
+*.exe
+*.vst3
+*.lib
+*.pdb
+*.ilk
+*.suo
+*.user
+*.DS_Store
+JUCE/
