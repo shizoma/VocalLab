@@ -1,7 +1,7 @@
 [Setup]
 AppName=Vocal Lab
 AppVersion=1.0.0
-AppPublisher=CiptaSuara & Soba Studio
+AppPublisher=CiptaSuara and Soba Studio
 DefaultDirName={pf}\Vocal Lab
 DefaultGroupName=Vocal Lab
 OutputDir=.\Installer

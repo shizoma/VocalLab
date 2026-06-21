@@ -13,7 +13,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(juce)
 
 juce_add_plugin(VocalLab
-    COMPANY_NAME            "CiptaSuara & Soba Studio"
+    COMPANY_NAME            "CiptaSuara and Soba Studio"
     BUNDLE_ID               "com.vocallab.plugin"
     IS_SYNTH                FALSE
     NEEDS_MIDI_INPUT        FALSE
