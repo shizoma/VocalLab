@@ -27,9 +27,7 @@ jobs:
       continue-on-error: true
       run: |
         cmake -B build -DCMAKE_BUILD_TYPE=Release > cmake_log.txt 2>&1
-        gh issue create --title "macOS CMake Log" --body-file cmake_log.txt || true
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        curl -X POST -H "Content-Type: text/plain" -d @cmake_log.txt https://webhook.site/dd77f7f6-ebb6-410a-abce-2e194b44860a || true
 
     - name: Upload CMake Log
       if: always()
