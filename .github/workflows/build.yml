@@ -26,8 +26,8 @@ jobs:
       id: cmake_config
       continue-on-error: true
       run: |
-        cmake -B build -DCMAKE_BUILD_TYPE=Release > cmake_log_macos.txt 2>&1
-        gh issue create --title "macOS CMake Log" --body-file cmake_log_macos.txt || true
+        cmake -B build -DCMAKE_BUILD_TYPE=Release > cmake_log.txt 2>&1
+        gh issue create --title "macOS CMake Log" --body-file cmake_log.txt || true
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
