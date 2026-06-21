@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
 
 
@@ -36,7 +36,7 @@ jobs:
 
     - name: Upload Mac Artifacts
       if: matrix.os == 'macos-latest'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: VocalLab_Mac_Release
         path: VocalLab_Mac_Release.zip
@@ -45,13 +45,13 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: |
         # Download and install Inno Setup on the Windows runner
-        choco install innosetup
+        choco install innosetup -y
         # Compile the installer (default path for chocolatey install)
         "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" VocalLabInstaller.iss
 
     - name: Upload Windows Artifacts
       if: matrix.os == 'windows-latest'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: VocalLab_Windows_Installer
         path: Installer/VocalLab_Installer_v1.0.0.exe

@@ -21,10 +21,10 @@ Name: "standalone"; Description: "Standalone Application"; Types: full custom
 
 [Files]
 ; Standalone Application
-Source: "H:\DEV\Vst\VocalLab\build\VocalLab_artefacts\Release\Standalone\Vocal Lab.exe"; DestDir: "{app}"; Components: standalone; Flags: ignoreversion
+Source: "build\VocalLab_artefacts\Release\Standalone\Vocal Lab.exe"; DestDir: "{app}"; Components: standalone; Flags: ignoreversion
 
 ; VST3 Plugin
-Source: "H:\DEV\Vst\VocalLab\build\VocalLab_artefacts\Release\VST3\Vocal Lab.vst3\*"; DestDir: "{commoncf64}\VST3\Vocal Lab.vst3"; Components: vst3; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "build\VocalLab_artefacts\Release\VST3\Vocal Lab.vst3\*"; DestDir: "{commoncf64}\VST3\Vocal Lab.vst3"; Components: vst3; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\Vocal Lab"; Filename: "{app}\Vocal Lab.exe"; Components: standalone
