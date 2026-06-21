@@ -22,7 +22,14 @@ jobs:
     - name: Configure CMake
       id: cmake_config
       continue-on-error: true
-      run: cmake -B build -DCMAKE_BUILD_TYPE=Release > cmake_log.txt 2>&1
+      run: |
+        cmake -B build -DCMAKE_BUILD_TYPE=Release > cmake_log_macos.txt 2>&1
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add cmake_log_macos.txt
+        git commit -m "Upload macOS CMake log" || true
+        git pull --rebase
+        git push || true
 
     - name: Upload CMake Log
       if: always()
